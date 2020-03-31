@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_api_helper/components/notification/informbox_component.dart';
-import 'package:line_api_helper/screens/home_page.dart';
+import 'package:line_api_helper/screens/main_page.dart';
 import 'package:line_api_helper/services/credential_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -102,7 +102,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     Padding(
                       padding: const EdgeInsets.all(20),
                       child: Text(
-                        "** Your Channel Access Token won't be stored in any online storage for your security (Which mean you need to provide your Channel Access Token every time.). **",
+                        "** Your Channel Access Token won't be stored in any online storage for your security (Which mean you need to provide your Channel Access Token every time you come back.). **",
                         style: TextStyle(color: Color.fromRGBO(252, 3, 90, 1)),
                         textAlign: TextAlign.center,
                       ),
@@ -114,30 +114,38 @@ class _WelcomePageState extends State<WelcomePage> {
                         child: RaisedButton(
                           color: Colors.green,
                           onPressed: () {
-                            if (channelAccessTokenTextField.text.length !=
+                            if (channelAccessTokenTextField.text.length == 0) {
+                              return informBox(context,
+                                  iconData:
+                                      FontAwesomeIcons.exclamationTriangle,
+                                  color: Color.fromRGBO(237, 211, 14, 1),
+                                  title: "Warning",
+                                  content:
+                                      "Please provided your Channel Access Token in the textbox (You Channel Access Token won't be stored)");
+                            }
+                            /* if (channelAccessTokenTextField.text.length !=
                                 172) {
-                              informBox(context,
+                              return informBox(context,
                                   iconData: FontAwesomeIcons.exclamationCircle,
                                   color: Color.fromRGBO(252, 3, 90, 1),
                                   title: "Error",
                                   content:
                                       "The Channel Access Token must contain 172 charactors.");
-                            } else {
-                              credential.channelAccessToken =
-                                  channelAccessTokenTextField.text;
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomePage(),
-                                ),
-                              );
-                              informBox(context,
-                                  iconData: FontAwesomeIcons.infoCircle,
-                                  color: Color.fromRGBO(28, 201, 106, 1),
-                                  title: "Welcome to LINE API Helper",
-                                  content:
-                                      "You can now start using LINE API Helper, Enjoy!");
-                            }
+                            } */
+                            credential.channelAccessToken =
+                                channelAccessTokenTextField.text;
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MainPage(),
+                              ),
+                            );
+                            informBox(context,
+                                iconData: FontAwesomeIcons.infoCircle,
+                                color: Color.fromRGBO(28, 201, 106, 1),
+                                title: "Welcome to LINE API Helper",
+                                content:
+                                    "You can now start using LINE API Helper, Enjoy!");
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(10),

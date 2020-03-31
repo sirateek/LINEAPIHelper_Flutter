@@ -15,10 +15,12 @@ void informBox(BuildContext context,
           Padding(
             padding: const EdgeInsets.all(5),
           ),
-          Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
+          Flexible(
+            child: Text(
+              title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           )
         ],
